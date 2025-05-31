@@ -13,3 +13,5 @@ const LightTheme = {
 
     errorColor: '#550101'
 }
+
+export { LightTheme };
