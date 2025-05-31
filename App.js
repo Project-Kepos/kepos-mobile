@@ -1,20 +1,20 @@
-import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
+import { AuthContext, AuthContextProvider } from './src/context/AuthContext';
+import { NavigationContainer } from '@react-navigation/native';
+import { useContext } from 'react';
+import PublicRoutes from './src/screens/routes/publicRoutes';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <AuthContextProvider>
+      <NavigationContainer>
+        <Routes />
+        </NavigationContainer>
+    </AuthContextProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function Routes() {
+  const { token } = useContext(AuthContext);
+  return <PublicRoutes />
+}
