@@ -1,5 +1,6 @@
 import { createStackNavigator } from "@react-navigation/stack";
 import HomePage from "../public/HomePage";
+import LoginPage from "../public/LoginPage";
 
 const Stack = createStackNavigator();
 
@@ -15,6 +16,10 @@ export default function PublicRoutes() {
             <Stack.Screen
                 name="Home"
                 component={HomePage}
+            />
+            <Stack.Screen
+                name="Login"
+                component={LoginPage}
             />
         </Stack.Navigator>
     )

@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         borderColor: LightTheme.secondaryText,
         borderWidth: 1,
         width: Dimensions.get("window").width * 0.8,
-        margin: 5,
+        marginVertical: 5,
         alignContent: "center",
         justifyContent: "space-around",
     },

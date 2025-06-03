@@ -6,6 +6,7 @@ const LightTheme = {
     primaryText: '#2b5501',
     secondaryText: '#65a603',
     terciaryText: '#ffffff',
+    quaternaryText: '#94B85E',
 
     activeBtn: '#2B5501',
     inactiveBtn: '#E1EECD',
