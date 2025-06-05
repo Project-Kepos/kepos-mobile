@@ -29,6 +29,7 @@ export async function registerUser(userData) {
         return response.data;
     } catch (error) {
         console.error('Erro ao cadastrar usuário:', error);
+        console.error('Erro ao cadastrar usuário:', error.response.data.message);
         throw error;
     }
 }
@@ -40,6 +41,7 @@ export async function loginUser(loginData) {
         return response.data;
     } catch (error) {
         console.error('Erro ao realizar login:', error);
+        console.error('Erro ao cadastrar usuário:', error.response.data.message);
         throw error;
     }
 }

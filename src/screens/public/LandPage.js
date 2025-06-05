@@ -4,7 +4,7 @@ import { LightTheme } from "../../styles/global";
 import StylizedButton from "../../components/StylizedButton";
 
 
-export default function HomePage({ navigation }) {
+export default function LandPage({ navigation }) {
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <StatusBar style="dark" backgroundColor={LightTheme.primaryBG} />
@@ -21,12 +21,12 @@ export default function HomePage({ navigation }) {
                 <View style={styles.authContainer}>
                     <StylizedButton
                         text="Fazer Login"
-                        onPress={() => navigation.popTo("Login")}
+                        onPress={() => navigation.navigate("Login")}
                         icon="login"
                     />
                     <StylizedButton
                         text="Realizar Cadastro"
-                        onPress={() => console.log("Register Pressed")}
+                        onPress={() => navigation.navigate("Sign")}
                         icon="person-add"
                     />
                 </View>
