@@ -5,7 +5,7 @@ import { Icon } from "@rneui/base";
 
 import { LightTheme } from "../styles/global.js";
 
-export default function StylizedButton({ text, onPress, icon }) {
+export default function StylizedButton({ text, onPress, icon, ...rest }) {
     return (
         <TouchableOpacity onPress={onPress} style={styles.button} >
             <View style={styles.container}>

@@ -8,13 +8,17 @@ import SignPage from "../public/SignPage";
 import HomePage from "../private/HomePage";
 import { LightTheme } from '../../styles/global';
 import ProfilePage from '../private/ProfilePage';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import AddDendroPage from '../private/AddDendroPage';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
 export default function PrivateRoutes() {
     return (
-        <RootTabs />
+        <GestureHandlerRootView>
+            <RootTabs />
+        </GestureHandlerRootView>
     )
 }
 
@@ -43,8 +47,42 @@ function RootTabs() {
                 headerTitle: '',
             })}
         >
-            <Tab.Screen name="Home" component={HomePage} />
+            <Tab.Screen name="Home" component={MainStack} />
             <Tab.Screen name="Profile" component={ProfilePage} />
         </Tab.Navigator>
+    )
+}
+
+function AddDendroStack() {
+    return (
+        <Stack.Navigator
+            initialRouteName='AddDendro'
+            screenOptions={{
+                headerTransparent: true,
+                headerTitle: '',
+                headerTintColor: LightTheme.primaryText,
+                headerStyle: {
+                    marginTop: 20, // Adjust this value as needed
+                },
+            }}
+        >
+            <Stack.Screen name="AddDendro" component={AddDendroPage} />
+        </Stack.Navigator>
+    )
+}
+
+function MainStack() {
+    return (
+        <Stack.Navigator
+            initialRouteName='Home'
+            screenOptions={{
+                headerTransparent: true,
+                headerTitle: '',
+                headerTintColor: LightTheme.primaryText,
+            }}
+        >
+            <Stack.Screen name="Home" component={HomePage} />
+            <Stack.Screen name="AddDendro" component={AddDendroStack} />
+        </Stack.Navigator>
     )
 }
