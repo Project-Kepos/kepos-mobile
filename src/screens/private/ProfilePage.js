@@ -138,6 +138,15 @@ export default function ProfilePage() {
                 <StatusBar style="auto" />
                 <View style={styles.mainContainer}>
                     <Text style={styles.loadingTXT}>Carregando dados do usuário...</Text>
+                    <View style={styles.btnContainer}>
+                            <StylizedButton
+                                text={"Deslogar"}
+                                icon="logout"
+                                onPress={logout}
+                                buttonStyle={{ backgroundColor: LightTheme.secondaryBG }}
+                                textStyle={{ color: LightTheme.primaryText }}
+                            />
+                        </View>
                 </View>
             </SafeAreaView>
         );
