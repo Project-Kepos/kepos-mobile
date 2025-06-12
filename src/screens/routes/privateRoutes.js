@@ -53,24 +53,6 @@ function RootTabs() {
     )
 }
 
-function AddDendroStack() {
-    return (
-        <Stack.Navigator
-            initialRouteName='AddDendro'
-            screenOptions={{
-                headerTransparent: true,
-                headerTitle: '',
-                headerTintColor: LightTheme.primaryText,
-                headerStyle: {
-                    marginTop: 20, // Adjust this value as needed
-                },
-            }}
-        >
-            <Stack.Screen name="AddDendro" component={AddDendroPage} />
-        </Stack.Navigator>
-    )
-}
-
 function MainStack() {
     return (
         <Stack.Navigator
@@ -82,7 +64,7 @@ function MainStack() {
             }}
         >
             <Stack.Screen name="Home" component={HomePage} />
-            <Stack.Screen name="AddDendro" component={AddDendroStack} />
+            <Stack.Screen name="AddDendro" component={AddDendroPage} />
         </Stack.Navigator>
     )
 }
