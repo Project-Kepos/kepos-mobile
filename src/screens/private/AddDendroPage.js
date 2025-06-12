@@ -1,16 +1,27 @@
 import { SafeAreaView } from "react-native-safe-area-context";
-import { LightTheme } from "../../styles/global";
 import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import * as Yup from "yup";
+
+import { LightTheme } from "../../styles/global";
 import StylizedInput from "../../components/StylizedInput";
 import StylizedButton from "../../components/StylizedButton";
-import { useState } from "react";
+import { Icon } from "@rneui/base";
+
+const validationSchema = Yup.object().shape({
+    dendroId: Yup.string()
+        .matches(/^[A-Z]{4}-[A-Z]{4}-[A-Z]{4}-[A-Z]{4}$/, "O código deve seguir o formato ABCD-EFGH-IJKL-MNOP")
+        .required("O código da estufa é obrigatório"),
+})
 
 export default function AddDendroPage({ navigation }) {
     const [dendroId, setDendroId] = useState('');
+    const [errors, setErrors] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
-    return (
-        <SafeAreaView style={styles.safeAreaView}>
-            {/* AddDendroPage content goes here */}
+    function insertCode() {
+        return (
             <View style={styles.mainContainer}>
                 <Text style={styles.title}>Adicionar Estufa</Text>
                 <View style={styles.inputContainer}>
@@ -20,7 +31,7 @@ export default function AddDendroPage({ navigation }) {
                         icon="home"
                         value={dendroId}
                         onChangeText={setDendroId}
-                        errors={null} // Replace with actual error handling if needed
+                        errors={errors} // Replace with actual error handling if needed
                     />
                 </View>
                 <View style={styles.btnContainer}>
@@ -36,6 +47,34 @@ export default function AddDendroPage({ navigation }) {
                     />
                 </View>
             </View>
+        )
+    }
+
+    function searchingDendro() {
+        return (
+            <View style={styles.mainContainer}>
+                <Text style={styles.title}>Adicionar Estufa</Text>
+                <View style={styles.inputContainer}>
+                    <Icon
+                        name="sensors"
+                        type="material"
+                        size={100}
+                        color={LightTheme.primaryText}
+                    />
+                </View>
+                <StylizedButton
+                    text="Cancelar"
+                    icon="close"
+                    onPress={() => navigation.goBack()}
+                />
+            </View>
+        )
+    }
+
+    return (
+        <SafeAreaView style={styles.safeAreaView}>
+            {/* AddDendroPage content goes here */}
+            {searchingDendro()}
         </SafeAreaView>
     )
 }
@@ -45,6 +84,7 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: LightTheme.primaryBG,
     },
+
     mainContainer: {
         flex: 1,
         marginTop: 20,
@@ -52,6 +92,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         justifyContent: "space-between",
     },
+
     title: {
         fontSize: 24,
         fontWeight: "bold",
@@ -59,6 +100,7 @@ const styles = StyleSheet.create({
         textAlign: "center",
         marginTop: 40,
     },
+
     inputContainer: {
         justifyContent: "center",
         alignItems: "center",
@@ -67,6 +109,7 @@ const styles = StyleSheet.create({
         borderColor: LightTheme.secondaryText,
         marginBottom: 20,
     },
+
     instructions: {
         color: LightTheme.primaryText,
         fontSize: 30,
