@@ -61,6 +61,7 @@ export default function AddDendroPage({ navigation }) {
                         size={100}
                         color={LightTheme.primaryText}
                     />
+                    <Text style={styles.instructions}>Insira o código de 12 digitos da sua estufa</Text>
                 </View>
                 <StylizedButton
                     text="Cancelar"
