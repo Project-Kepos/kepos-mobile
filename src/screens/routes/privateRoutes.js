@@ -10,6 +10,8 @@ import { LightTheme } from '../../styles/global';
 import ProfilePage from '../private/ProfilePage';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import AddDendroPage from '../private/AddDendroPage';
+import DendroPage from '../private/DendroPage';
+import EditDendroNamePage from '../private/EditDendroNamePage';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -65,6 +67,8 @@ function MainStack() {
         >
             <Stack.Screen name="Home" component={HomePage} />
             <Stack.Screen name="AddDendro" component={AddDendroPage} />
+            <Stack.Screen name="DendroPage" component={DendroPage} />
+            <Stack.Screen name="EditDendroName" component={EditDendroNamePage} />
         </Stack.Navigator>
     )
 }

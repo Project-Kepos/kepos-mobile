@@ -49,7 +49,10 @@ export default function HomePage({ navigation }) {
                         <DendroCard
                             key={dendro.id}
                             dendro={dendro}
-                            onPress={() => console.log(`Dendro ${dendro.id} pressionado`)}
+                            onPress={() => {
+                                console.log(`Dendro ${dendro.id} pressionado`)
+                                navigation.navigate("DendroPage", { dendroId: dendro.id })
+                            }}
                         />
                     )) : (
                         null
@@ -77,9 +80,14 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     titleContainer: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: 'center',
         marginBottom: 20,
     },
     titleText: {
+        alignItems: "center",
+        justifyContent: 'center',
         fontSize: 24,
         fontWeight: "bold",
         color: LightTheme.primaryText,

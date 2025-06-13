@@ -220,7 +220,7 @@ export default function AddDendroPage({ navigation }) {
                     <StylizedButton
                         text="Voltar para o Início"
                         icon="home"
-                        onPress={() => navigation.navigate("Home")}
+                        onPress={() => navigation.goBack()}
                     />
                     <StylizedButton
                         text="Adicionar Outra Estufa"
