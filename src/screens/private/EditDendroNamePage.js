@@ -34,9 +34,7 @@ export default function EditDendroNamePage() {
             await validationSchema.validate({ name });
             await updateDendro(dendroId, { name });
             setIsLoading(false);
-            Alert.alert("Sucesso", "Nome da estufa atualizado com sucesso!", [
-                { text: "OK", onPress: () => navigation.goBack() }
-            ]);
+            navigation.goBack();
         } catch (error) {
             setIsLoading(false);
             if (error.name === "ValidationError") {
@@ -53,7 +51,6 @@ export default function EditDendroNamePage() {
                 <Text style={styles.title}>Editar Nome da Estufa</Text>
                 <View style={styles.inputContainer}>
                     <StylizedInput
-                        label="Novo nome"
                         placeholder="Digite o novo nome da estufa"
                         value={name}
                         onChangeText={setName}
@@ -92,7 +89,7 @@ const styles = StyleSheet.create({
         marginTop: 20,
         marginHorizontal: 20,
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "space-between",
     },
     title: {
         fontSize: 24,

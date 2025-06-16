@@ -3,7 +3,7 @@ import { Icon } from "@rneui/base";
 import { StyleSheet, Text, View, Dimensions, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useCallback, useEffect, useState } from "react";
-import { ScrollView } from "react-native-gesture-handler";
+import { RefreshControl, ScrollView } from "react-native-gesture-handler";
 
 import { LightTheme } from "../../styles/global";
 import { getDendroById } from "../../service/dendroService";
@@ -58,7 +58,7 @@ export default function DendroPage({ navigation, route }) {
     const handleRemoveDendro = useCallback(async () => {
         setIsLoading(true);
         try {
-            await removeUserFromDendro({dendroId});
+            await removeUserFromDendro( dendroId );
             setIsLoading(false);
             navigation.goBack();
         } catch (error) {
@@ -66,7 +66,7 @@ export default function DendroPage({ navigation, route }) {
             setError(error);
             setIsLoading(false);
         }
-        }, [dendroId]);
+    }, [dendroId]);
 
     useEffect(() => {
         getDendroDetails();
@@ -81,7 +81,15 @@ export default function DendroPage({ navigation, route }) {
     return (
         <SafeAreaView style={styles.safeAreaView}>
             <StatusBar style="auto" />
-            <ScrollView>
+            <ScrollView refreshControl={
+                <RefreshControl refreshing={isLoading} onRefresh={() => {
+                    getDendroDetails();
+                    getModules();
+                }} colors={[LightTheme.secondaryText]} progressBackgroundColor={LightTheme.primaryBG} tintColor={LightTheme.primaryText} title="Atualizando..." titleColor={LightTheme.primaryText}
+                />
+            }
+                scrollEventThrottle={16}
+                style={styles.scrollView}>
                 <View style={styles.mainContainer}>
                     <View style={styles.titleContainer}>
                         <Text style={styles.NameText}>{dendro?.name}</Text>
@@ -148,7 +156,7 @@ export default function DendroPage({ navigation, route }) {
                         )}
                         <TouchableOpacity
                             style={styles.addDendroContainer}
-                            onPress={() => navigation.navigate("AddDendro")}>
+                            onPress={() => navigation.navigate("AddModule", { dendroId: dendro.id })}>
                             <Icon name="add" size={24} color={LightTheme.primaryText} />
                             <Text style={styles.addDendroText}>Adicionar Modulo</Text>
                         </TouchableOpacity>
@@ -162,7 +170,7 @@ export default function DendroPage({ navigation, route }) {
                         <StylizedButton
                             icon={"edit"}
                             text={"Alterar nome da estufa"}
-                            onPress={() => navigation.navigate("EditDendroNamePage", { dendroId: dendro.id })}
+                            onPress={() => navigation.navigate("EditDendroName", { dendroId: dendro.id })}
                         />
                         <StylizedButton
                             icon={"cancel"}
@@ -189,8 +197,8 @@ const styles = StyleSheet.create({
         marginHorizontal: 20,
     },
     titleContainer: {
-        justifyContent: 'flex-start',
-        alignItems: 'flex-start',
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     titleText: {
         fontSize: 24,
@@ -265,7 +273,7 @@ const styles = StyleSheet.create({
     },
     moduloText: {
         marginTop: 20,
-        textAlign: 'left',
+        textAlign: 'center',
         fontSize: 24,
         fontWeight: 'bold',
         color: LightTheme.primaryText,
